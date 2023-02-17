@@ -56,7 +56,7 @@ function update(){
         pret:inp3.value,
     }
 
-    updatePhone(phone);``
+    updatePhone(phone);
 }
 
 async function attachUpdatePage(phone){
@@ -66,28 +66,37 @@ async function attachUpdatePage(phone){
     <h1>Update phone</h1>
     <input name="phoneId" class="phoneId" type="hidden" value="${phone.phoneId}"/>
 
-    <p>
-    <label for="marca">marca</label>
-    <input name="marca" type="text" class="marca" value="${phone.marca}"  disabled>
+    <ul class="error"
+
+    </ul>
 
     <p>
-    <label for="model">Model</label>
-    <input name="model" type="text" class="model" value="${phone.model}">
-    </p>
+        <label for="marca">marca</label>
+        <input name="marca" type="text" class="marca" value="${phone.marca}"  disabled>
+
     <p>
-    <label for="pret">Pret</label>
-    <input name="pret" type="text" class="pret" value="${phone.pret}">
+        <label for="model">Model</label>
+        <input name="model" type="text" class="model" value="${phone.model}">
+    </p>
+
+    <p>
+        <label for="pret">Pret</label>
+        <input name="pret" type="text" class="pret" value="${phone.pret}">
     </p>
 
     
 
    <div>
-    <button class="update">Update Phone</button>
-    <button class="delete">Delete Phone</button>
+        <button class="update">Update Phone</button>
+        <button class="delete">Delete phone</button>
+        <button class="cancel">Cancel </button>
    </div>
     
     `
-
+    let btnCancel=document.querySelector(".cancel")
+    btnCancel.addEventListener("click",()=>{
+        attachHomePage();
+    })
   
 
     let btnUpdate=document.querySelector(".update");
@@ -122,7 +131,7 @@ async function attachUpdatePage(phone){
 
         attachHomePage();
     });
- }
+  }
 
 function attachNewPhonePage(){
     let container=document.querySelector('.container');
