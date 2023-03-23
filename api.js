@@ -1,5 +1,5 @@
 function api(path,method,body=null){
-    const url="http://localhost:8080/api/v1/"+path;
+    const url="http://localhost:8080/api/v1/telefon/"+path;
 
     const options={
         method,
@@ -21,7 +21,7 @@ function api(path,method,body=null){
 async function getAllPhones(){
 
 
-    let data = await api("phones",'GET');
+    let data = await api("all",'GET');
 
 
     data= await data.json();
@@ -30,7 +30,7 @@ async function getAllPhones(){
     return data;
 }
 
-async function addPhonr(phone){
+async function addPhone(phone){
     let data=await api("add",'POST',phone);
 
     return data.json();
@@ -44,18 +44,18 @@ async function  getAllMarci(){
     return data;
 }
 
-async function getAllPhonesByMarca(marca){
+// async function getAllPhonesByMarca(marca){
 
-    let data=await api(`phones/${marca}`,'GET');
+//     let data=await api(`phones/${marca}`,'GET');
 
-    data=await data.json();
+//     data=await data.json();
 
-    return data;
-}
+//     return data;
+// }
 
 
-async function deletePhone(telefonId){
-    let data=await api(`delete/${telefonId}`,'DELETE');
+async function deletePhone(telefonModel){
+    let data=await api(`deleteByModel/${telefonModel}`,'DELETE');
 }
 
 async function updatePhone(phone){

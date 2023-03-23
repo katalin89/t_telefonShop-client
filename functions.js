@@ -23,14 +23,24 @@ async function attachHomePage(){
 
     `
 
-    // container.addEventListener("click",async(e)=>{
-    //         let data=e.target;
-    //         if(data.classList.contains("pret")){
-    //             let vec=await sortByMarca();
-    //             attachRows(vec);
-    //         }
+    container.addEventListener("click",async(e)=>{
+            let data=e.target;
+            if(data.classList.contains("pret")){
+                let vec=await sortByPrice();
+                attachRows(vec);
+            }else if(data.classList.contains("marca")){
+
+                let vec=await sortByMarca();
+
+                attachRows(vec);
+
+            }else if(data.classList.contains("model")){
+                let vec=await sortByModel();
+
+                attachRows(vec);
+            }
         
-    // })
+    })
     let data = await getAllPhones();
     attachRows(data);
 
@@ -43,7 +53,7 @@ async function attachHomePage(){
 
     let rowsContainer=document.querySelector(".container-telefoane");
 
-    rowsContainer.addEventListener("click",async(e)=>{
+    rowsContainer.addEventListener("click",(e)=>{
         let obj=e.target.parentNode;
 
         let phoneProperties=data.children;
@@ -188,11 +198,15 @@ async function attachUpdatePage(phone){
   }
 
 function attachNewPhonePage(){
-    let container=document.querySelector('.container');
+    let container=document.querySelector(".container");
 
     container.innerHTML=`
     
     <h1>New phone</h1>
+
+    <ul class="error">
+            
+    </ul>
 
     <p>
     <label for="marca">marca</label>
