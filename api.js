@@ -7,7 +7,7 @@ function api(path,method,body=null){
             'Content-Type':'application/json;charset=utf-8',
         },
 
-        mode:"cors"
+   
     };
 
     if(body!==null){
@@ -33,7 +33,7 @@ async function getAllPhones(){
 async function addPhone(phone){
     let data=await api("add",'POST',phone);
 
-    return data.json();
+    return data;
 }
 
 async function  getAllMarci(){
@@ -86,7 +86,7 @@ async function sortByMarca(){
 
 async function sortByModel(){
 
-    let data=await api(`sortByModel`,'Get');
+    let data=await api(`sortByModel`,'GET');
 
     data =await data.json();
     

@@ -1,3 +1,4 @@
+//de sters  si create
 async function attachHomePage(){
     let container=document.querySelector(".container");
 
@@ -7,24 +8,30 @@ async function attachHomePage(){
   
 	<table>
 		<thead>
-			<tr>
-            
-            <th  class="id">Id</th>
+			<tr class="container-sort">
+
+            <th class="id">Id</th>
 			<th class="marca">Marca</th>
 			<th class="model">Model</th>
 			<th class="pret">Pret</th>
 				
 			</tr>
 		</thead>
-		<tbody class=container-phones>
+		<tbody class="container-telefoane">
 		
 		</tbody>
 	</table>
 
-    `
+    `;
+    let data=await getAllPhones();
+    attachRows(data);
 
-    container.addEventListener("click",async(e)=>{
+    let containerSort=document.querySelector(".container-sort");
+
+    containerSort.addEventListener("click",async(e)=>{
+        e.preventDefault;
             let data=e.target;
+
             if(data.classList.contains("pret")){
                 let vec=await sortByPrice();
                 attachRows(vec);
@@ -40,11 +47,8 @@ async function attachHomePage(){
                 attachRows(vec);
             }
         
-    })
-    let data = await getAllPhones();
-    attachRows(data);
-
-
+    });
+   
     let btnNewPhone=document.querySelector(".new-phone")
 
     btnNewPhone.addEventListener("click",(e)=>{
@@ -66,7 +70,6 @@ async function attachHomePage(){
 
         }
         attachUpdatePage(phone);
-        
     });
 }
 
@@ -96,16 +99,16 @@ async function attachUpdatePage(phone){
     </ul>
 
     <p>
-        <label for="marca">marca</label>
+        <label for="marcaInp">marca</label>
         <input name="marca" type="text" class="marca" value="${phone.marca}"  disabled>
 
     <p>
-        <label for="model">Model</label>
+        <label for="modelInp">Model</label>
         <input name="model" type="text" class="model" value="${phone.model}">
     </p>
 
     <p>
-        <label for="pret">Pret</label>
+        <label for="pretInp">Pret</label>
         <input name="pret" type="text" class="pret" value="${phone.pret}">
     </p>
 
@@ -142,7 +145,7 @@ async function attachUpdatePage(phone){
         let erors=[];
 
         
-
+        
         if(inp2.value==""){
             erors.push("trebuie pusa modelul");
             inp2.getElementsByClassName.borderColor="red";
@@ -175,7 +178,7 @@ async function attachUpdatePage(phone){
             errorContainer.innerHTML="";
         }
 
-        if(error.length==0){
+        if(erors.length==0){
 
             let data=await updatePhone(phone);
 
@@ -234,7 +237,7 @@ function attachNewPhonePage(){
         </div>
         
         
-    `
+    `;
 
     let btnCancel=document.querySelector(".cancel")
     btnCancel=addEventListener("click",()=>{
@@ -267,7 +270,7 @@ btnAddNewPhone.addEventListener("click",async()=>{
 
     if(inp1.value==""){
         erors.push("Trebuie pusa marca");
-        inp1.getElementsByClassName.borderColor="red";
+        inp1.style.borderColor="red";
     }
 
     if(inp2.value==""){
@@ -298,12 +301,10 @@ btnAddNewPhone.addEventListener("click",async()=>{
     }
     else{
         let data=await addPhone(phone);
-
         attachHomePage();
     }
    
 })
-
 }
 
 function createRow(phone){
@@ -311,11 +312,11 @@ function createRow(phone){
 
     tr.innerHTML=`
     
-    <td id="id-${phone.id}" class="id">${phone.id}</td>
+        <td >${phone.id}</td>
         <th>${phone.marca}</th>
         <td>${phone.model}</td>
 		<td>${phone.pret}</td>
-    `
+    ` ;
 
     return tr;
 
@@ -336,7 +337,7 @@ function createRow(phone){
 }
 
 function attachRows(arr){
-    let container=document.querySelector(".container");
+    let container=document.querySelector(".container-telefoane");
     container.innerHTML="";
     for(let i=0;i<arr.length;i++){
         container.appendChild(createRow(arr[i]));
